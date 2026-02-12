@@ -120,40 +120,59 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-black text-white font-sans">
-      {/* 头部 - 车机风格 */}
-      <header className="flex-none border-b border-neutral-800 bg-neutral-900/95 backdrop-blur-sm">
+    <div className="flex h-screen flex-col" style={{ backgroundColor: '#f5f3f0' }}>
+      {/* 头部 - 莫兰迪风格 */}
+      <header className="flex-none border-b" style={{ borderColor: '#e8e4df', backgroundColor: '#f9f7f4' }}>
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo 和标题 */}
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-600">
-                  <Car className="h-6 w-6 text-white" />
+                <div
+                  className="flex h-12 w-12 items-center justify-center rounded-xl"
+                  style={{ backgroundColor: '#9ab8c4' }}
+                >
+                  <Car className="h-6 w-6" style={{ color: '#ffffff' }} />
                 </div>
-                <div className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full bg-green-500 border-2 border-neutral-900" />
+                <div
+                  className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2"
+                  style={{ backgroundColor: '#a8c4a0', borderColor: '#f9f7f4' }}
+                />
               </div>
               <div>
-                <h1 className="text-xl font-semibold text-white tracking-wide">
+                <h1
+                  className="text-xl font-semibold tracking-wide"
+                  style={{ color: '#4a5a6a' }}
+                >
                   车圈红娘
                 </h1>
-                <p className="text-xs text-neutral-400 mt-0.5">智能汽车顾问</p>
+                <p className="text-xs mt-0.5" style={{ color: '#9aa8a8' }}>
+                  智能汽车顾问
+                </p>
               </div>
             </div>
 
             {/* 状态指示器 */}
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
-                <Activity className="h-4 w-4 text-green-500" />
-                <span className="text-xs text-neutral-400">在线</span>
+                <Activity className="h-4 w-4" style={{ color: '#a8c4a0' }} />
+                <span className="text-xs" style={{ color: '#9aa8a8' }}>
+                  在线
+                </span>
               </div>
-              <div className="hidden md:flex items-center gap-4 text-xs text-neutral-500">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-800">
-                  <Settings className="h-3.5 w-3.5" />
+              <div className="hidden md:flex items-center gap-4 text-xs" style={{ color: '#9aa8a8' }}>
+                <div
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
+                  style={{ backgroundColor: '#e8e4df' }}
+                >
+                  <Settings className="h-3.5 w-3.5" style={{ color: '#7a8a9a' }} />
                   <span>智能推荐</span>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-800">
-                  <HelpCircle className="h-3.5 w-3.5" />
+                <div
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
+                  style={{ backgroundColor: '#e8e4df' }}
+                >
+                  <HelpCircle className="h-3.5 w-3.5" style={{ color: '#7a8a9a' }} />
                   <span>专业解答</span>
                 </div>
               </div>
@@ -163,7 +182,7 @@ export default function ChatPage() {
       </header>
 
       {/* 消息列表区域 */}
-      <div className="flex-1 overflow-y-auto bg-neutral-950">
+      <div className="flex-1 overflow-y-auto" style={{ backgroundColor: '#f5f3f0' }}>
         <div className="container mx-auto max-w-5xl px-6 py-8">
           <div className="space-y-6">
             {messages.map((message, index) => (
@@ -177,24 +196,27 @@ export default function ChatPage() {
                 <div
                   className={`flex-none flex h-10 w-10 items-center justify-center rounded-lg ${
                     message.role === 'user'
-                      ? 'bg-neutral-800'
-                      : 'bg-orange-600'
+                      ? ''
+                      : ''
                   }`}
+                  style={{
+                    backgroundColor: message.role === 'user' ? '#d4c4b0' : '#9ab8c4',
+                  }}
                 >
                   {message.role === 'user' ? (
-                    <User className="h-5 w-5 text-neutral-400" />
+                    <User className="h-5 w-5" style={{ color: '#6a5a4a' }} />
                   ) : (
-                    <Car className="h-5 w-5 text-white" />
+                    <Car className="h-5 w-5" style={{ color: '#ffffff' }} />
                   )}
                 </div>
 
                 {/* 消息内容 */}
                 <div
-                  className={`flex-none max-w-[70%] rounded-2xl px-5 py-4 ${
-                    message.role === 'user'
-                      ? 'bg-neutral-800 text-neutral-100'
-                      : 'bg-neutral-900 text-neutral-100'
-                  }`}
+                  className={`flex-none max-w-[70%] rounded-2xl px-5 py-4 shadow-sm`}
+                  style={{
+                    backgroundColor: message.role === 'user' ? '#e8e4df' : '#ffffff',
+                    color: '#4a5a6a',
+                  }}
                 >
                   <p className="text-sm leading-relaxed whitespace-pre-wrap">
                     {message.content}
@@ -206,17 +228,34 @@ export default function ChatPage() {
             {/* 加载状态 */}
             {isLoading && (
               <div className="flex gap-4">
-                <div className="flex-none flex h-10 w-10 items-center justify-center rounded-lg bg-orange-600">
-                  <Car className="h-5 w-5 text-white" />
+                <div
+                  className="flex-none flex h-10 w-10 items-center justify-center rounded-lg"
+                  style={{ backgroundColor: '#9ab8c4' }}
+                >
+                  <Car className="h-5 w-5" style={{ color: '#ffffff' }} />
                 </div>
-                <div className="flex-none rounded-2xl bg-neutral-900 px-5 py-4">
+                <div
+                  className="flex-none rounded-2xl px-5 py-4 shadow-sm"
+                  style={{ backgroundColor: '#ffffff', color: '#4a5a6a' }}
+                >
                   <div className="flex items-center gap-2">
                     <div className="flex gap-1">
-                      <div className="h-2 w-2 rounded-full bg-orange-500 animate-bounce" />
-                      <div className="h-2 w-2 rounded-full bg-orange-500 animate-bounce" style={{ animationDelay: '0.15s' }} />
-                      <div className="h-2 w-2 rounded-full bg-orange-500 animate-bounce" style={{ animationDelay: '0.3s' }} />
+                      <div
+                        className="h-2 w-2 rounded-full animate-bounce"
+                        style={{ backgroundColor: '#9ab8c4' }}
+                      />
+                      <div
+                        className="h-2 w-2 rounded-full animate-bounce"
+                        style={{ backgroundColor: '#9ab8c4', animationDelay: '0.15s' }}
+                      />
+                      <div
+                        className="h-2 w-2 rounded-full animate-bounce"
+                        style={{ backgroundColor: '#9ab8c4', animationDelay: '0.3s' }}
+                      />
                     </div>
-                    <span className="text-sm text-neutral-400 ml-2">思考中...</span>
+                    <span className="text-sm ml-2" style={{ color: '#9aa8a8' }}>
+                      思考中...
+                    </span>
                   </div>
                 </div>
               </div>
@@ -227,8 +266,11 @@ export default function ChatPage() {
         </div>
       </div>
 
-      {/* 输入区域 - 车机风格 */}
-      <div className="flex-none border-t border-neutral-800 bg-neutral-900/95 backdrop-blur-sm">
+      {/* 输入区域 - 莫兰迪风格 */}
+      <div
+        className="flex-none border-t"
+        style={{ borderColor: '#e8e4df', backgroundColor: '#f9f7f4' }}
+      >
         <div className="container mx-auto max-w-5xl px-6 py-5">
           <form onSubmit={handleSubmit} className="flex items-center gap-3">
             <div className="flex-1 relative">
@@ -239,13 +281,19 @@ export default function ChatPage() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="输入您的问题..."
                 disabled={isLoading}
-                className="w-full h-12 px-5 pr-12 text-sm text-white placeholder-neutral-500 bg-neutral-800 rounded-xl border border-neutral-700 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full h-12 px-5 pr-12 text-sm rounded-xl border focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
+                  backgroundColor: '#ffffff',
+                  color: '#4a5a6a',
+                  borderColor: '#e0dcd7',
+                }}
               />
               {input.trim() && !isLoading && (
                 <button
                   type="button"
                   onClick={() => setInput('')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 transition-colors"
+                  style={{ color: '#9aa8a8' }}
                 >
                   ×
                 </button>
@@ -254,7 +302,10 @@ export default function ChatPage() {
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="flex-none h-12 w-12 flex items-center justify-center rounded-xl bg-orange-600 text-white hover:bg-orange-500 active:bg-orange-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-orange-600"
+              className="flex-none h-12 w-12 flex items-center justify-center rounded-xl text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{
+                backgroundColor: '#9ab8c4',
+              }}
             >
               {isLoading ? (
                 <Loader2 className="h-5 w-5 animate-spin" />
@@ -263,7 +314,7 @@ export default function ChatPage() {
               )}
             </button>
           </form>
-          <div className="mt-4 flex items-center justify-center gap-4 text-xs text-neutral-500">
+          <div className="mt-4 flex items-center justify-center gap-4 text-xs" style={{ color: '#9aa8a8' }}>
             <span>AI 驱动</span>
             <span>•</span>
             <span>实时响应</span>
