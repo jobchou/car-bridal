@@ -12,7 +12,7 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: '你好！我是扣子智能体，很高兴为你服务。有什么我可以帮助你的吗？',
+      content: '你好！我是车圈红娘，很高兴为你服务。有什么我可以帮助你的吗？',
     },
   ]);
   const [input, setInput] = useState('');
@@ -129,7 +129,7 @@ export default function ChatPage() {
               <Bot className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <h1 className="text-xl font-semibold">扣子智能体</h1>
+              <h1 className="text-xl font-semibold">车圈红娘</h1>
               <p className="text-sm text-muted-foreground">AI 助手随时待命</p>
             </div>
           </div>
