@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Loader2, Car, Zap, ShieldCheck, Gauge } from 'lucide-react';
+import { Send, Bot, User, Loader2, Car, Settings, HelpCircle, Activity } from 'lucide-react';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -120,198 +120,158 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white overflow-hidden relative">
-      {/* 背景装饰 */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-3xl" />
-
-        {/* 科技线条装饰 */}
-        <svg className="absolute top-0 left-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-cyan-400" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-
-        {/* 车辆图标装饰 */}
-        <div className="absolute top-20 right-20 opacity-20">
-          <Car className="w-32 h-32 text-cyan-400 animate-float" />
-        </div>
-        <div className="absolute bottom-20 left-20 opacity-20">
-          <Car className="w-24 h-24 text-purple-400 animate-float" style={{ animationDelay: '2s' }} />
-        </div>
-      </div>
-
-      {/* 头部 */}
-      <header className="relative border-b border-white/10 bg-slate-950/50 backdrop-blur-xl">
-        <div className="container mx-auto px-4 py-5">
+    <div className="flex h-screen flex-col bg-black text-white font-sans">
+      {/* 头部 - 车机风格 */}
+      <header className="flex-none border-b border-neutral-800 bg-neutral-900/95 backdrop-blur-sm">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
+            {/* Logo 和标题 */}
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/30">
-                  <Car className="h-7 w-7 text-white" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-600">
+                  <Car className="h-6 w-6 text-white" />
                 </div>
-                <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-green-500 shadow-lg">
-                  <div className="h-2 w-2 animate-ping rounded-full bg-white" />
-                </div>
+                <div className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full bg-green-500 border-2 border-neutral-900" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                <h1 className="text-xl font-semibold text-white tracking-wide">
                   车圈红娘
                 </h1>
-                <div className="flex items-center gap-2 mt-1">
-                  <div className="flex h-1.5 w-1.5 rounded-full bg-green-500" />
-                  <p className="text-sm text-cyan-200/80">AI 助手随时待命</p>
-                </div>
+                <p className="text-xs text-neutral-400 mt-0.5">智能汽车顾问</p>
               </div>
             </div>
 
-            {/* 功能标签 */}
-            <div className="hidden md:flex items-center gap-4">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur">
-                <Zap className="h-4 w-4 text-yellow-400" />
-                <span className="text-xs text-white/80">智能匹配</span>
+            {/* 状态指示器 */}
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                <Activity className="h-4 w-4 text-green-500" />
+                <span className="text-xs text-neutral-400">在线</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur">
-                <ShieldCheck className="h-4 w-4 text-green-400" />
-                <span className="text-xs text-white/80">专业认证</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur">
-                <Gauge className="h-4 w-4 text-purple-400" />
-                <span className="text-xs text-white/80">实时响应</span>
+              <div className="hidden md:flex items-center gap-4 text-xs text-neutral-500">
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-800">
+                  <Settings className="h-3.5 w-3.5" />
+                  <span>智能推荐</span>
+                </div>
+                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-800">
+                  <HelpCircle className="h-3.5 w-3.5" />
+                  <span>专业解答</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      {/* 消息列表 */}
-      <div className="relative flex-1 overflow-y-auto p-6">
-        <div className="container mx-auto max-w-4xl space-y-6">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex gap-4 ${
-                message.role === 'user' ? 'flex-row-reverse' : ''
-              } animate-slideIn`}
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
+      {/* 消息列表区域 */}
+      <div className="flex-1 overflow-y-auto bg-neutral-950">
+        <div className="container mx-auto max-w-5xl px-6 py-8">
+          <div className="space-y-6">
+            {messages.map((message, index) => (
               <div
-                className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl ${
-                  message.role === 'user'
-                    ? 'bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg shadow-purple-500/30'
-                    : 'bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/30'
+                key={index}
+                className={`flex gap-4 ${
+                  message.role === 'user' ? 'flex-row-reverse' : ''
                 }`}
               >
-                {message.role === 'user' ? (
-                  <User className="h-5 w-5 text-white" />
-                ) : (
-                  <Car className="h-5 w-5 text-white" />
-                )}
-              </div>
-              <div
-                className={`max-w-[75%] rounded-2xl px-5 py-4 shadow-2xl backdrop-blur ${
-                  message.role === 'user'
-                    ? 'bg-gradient-to-br from-purple-600 to-pink-600 text-white border border-white/20'
-                    : 'bg-slate-900/80 text-cyan-50 border border-cyan-500/30'
-                }`}
-              >
-                <p className="whitespace-pre-wrap text-sm leading-relaxed">
-                  {message.content}
-                </p>
-              </div>
-            </div>
-          ))}
-          {isLoading && (
-            <div className="flex gap-4 animate-slideIn">
-              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/30">
-                <Car className="h-5 w-5 text-white" />
-              </div>
-              <div className="flex items-center gap-3 rounded-2xl bg-slate-900/80 px-5 py-4 border border-cyan-500/30 backdrop-blur shadow-2xl">
-                <div className="flex gap-1">
-                  <div className="h-2 w-2 rounded-full bg-cyan-400 animate-bounce" />
-                  <div className="h-2 w-2 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '0.1s' }} />
-                  <div className="h-2 w-2 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '0.2s' }} />
+                {/* 头像 */}
+                <div
+                  className={`flex-none flex h-10 w-10 items-center justify-center rounded-lg ${
+                    message.role === 'user'
+                      ? 'bg-neutral-800'
+                      : 'bg-orange-600'
+                  }`}
+                >
+                  {message.role === 'user' ? (
+                    <User className="h-5 w-5 text-neutral-400" />
+                  ) : (
+                    <Car className="h-5 w-5 text-white" />
+                  )}
                 </div>
-                <span className="text-sm text-cyan-200/80">智能分析中...</span>
+
+                {/* 消息内容 */}
+                <div
+                  className={`flex-none max-w-[70%] rounded-2xl px-5 py-4 ${
+                    message.role === 'user'
+                      ? 'bg-neutral-800 text-neutral-100'
+                      : 'bg-neutral-900 text-neutral-100'
+                  }`}
+                >
+                  <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                    {message.content}
+                  </p>
+                </div>
               </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
+            ))}
+
+            {/* 加载状态 */}
+            {isLoading && (
+              <div className="flex gap-4">
+                <div className="flex-none flex h-10 w-10 items-center justify-center rounded-lg bg-orange-600">
+                  <Car className="h-5 w-5 text-white" />
+                </div>
+                <div className="flex-none rounded-2xl bg-neutral-900 px-5 py-4">
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-1">
+                      <div className="h-2 w-2 rounded-full bg-orange-500 animate-bounce" />
+                      <div className="h-2 w-2 rounded-full bg-orange-500 animate-bounce" style={{ animationDelay: '0.15s' }} />
+                      <div className="h-2 w-2 rounded-full bg-orange-500 animate-bounce" style={{ animationDelay: '0.3s' }} />
+                    </div>
+                    <span className="text-sm text-neutral-400 ml-2">思考中...</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div ref={messagesEndRef} />
+          </div>
         </div>
       </div>
 
-      {/* 输入框 */}
-      <div className="relative border-t border-white/10 bg-slate-950/50 backdrop-blur-xl">
-        <div className="container mx-auto max-w-4xl p-6">
-          <form onSubmit={handleSubmit} className="relative group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl opacity-30 blur group-hover:opacity-60 transition-opacity duration-300" />
-            <div className="relative flex items-center gap-3 bg-slate-900 rounded-2xl p-2 border border-white/10">
+      {/* 输入区域 - 车机风格 */}
+      <div className="flex-none border-t border-neutral-800 bg-neutral-900/95 backdrop-blur-sm">
+        <div className="container mx-auto max-w-5xl px-6 py-5">
+          <form onSubmit={handleSubmit} className="flex items-center gap-3">
+            <div className="flex-1 relative">
               <input
                 ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="输入您的问题，车圈红娘为您解答..."
+                placeholder="输入您的问题..."
                 disabled={isLoading}
-                className="flex-1 bg-transparent px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none disabled:opacity-50"
+                className="w-full h-12 px-5 pr-12 text-sm text-white placeholder-neutral-500 bg-neutral-800 rounded-xl border border-neutral-700 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               />
-              <button
-                type="submit"
-                disabled={isLoading || !input.trim()}
-                className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/30 transition-all duration-300 hover:scale-110 hover:shadow-cyan-500/50 disabled:opacity-50 disabled:hover:scale-100 disabled:shadow-none"
-              >
-                {isLoading ? (
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                ) : (
-                  <Send className="h-5 w-5" />
-                )}
-              </button>
+              {input.trim() && !isLoading && (
+                <button
+                  type="button"
+                  onClick={() => setInput('')}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors"
+                >
+                  ×
+                </button>
+              )}
             </div>
+            <button
+              type="submit"
+              disabled={isLoading || !input.trim()}
+              className="flex-none h-12 w-12 flex items-center justify-center rounded-xl bg-orange-600 text-white hover:bg-orange-500 active:bg-orange-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-orange-600"
+            >
+              {isLoading ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                <Send className="h-5 w-5" />
+              )}
+            </button>
           </form>
-          <div className="mt-3 flex items-center justify-center gap-6 text-xs text-white/40">
-            <span>Powered by AI</span>
+          <div className="mt-4 flex items-center justify-center gap-4 text-xs text-neutral-500">
+            <span>AI 驱动</span>
             <span>•</span>
-            <span>实时智能分析</span>
+            <span>实时响应</span>
             <span>•</span>
-            <span>专业汽车顾问</span>
+            <span>智能分析</span>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-
-        .animate-slideIn {
-          animation: slideIn 0.3s ease-out;
-        }
-      `}</style>
     </div>
   );
 }
