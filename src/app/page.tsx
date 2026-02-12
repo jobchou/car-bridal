@@ -17,6 +17,7 @@ export default function ChatPage() {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [sessionId, setSessionId] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -47,11 +48,19 @@ export default function ChatPage() {
         },
         body: JSON.stringify({
           messages: [...messages, { role: 'user', content: userMessage }],
+          session_id: sessionId,
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to get response');
+      }
+
+      // 从响应头中获取 session_id
+      const newSessionId = response.headers.get('X-Session-ID');
+      if (newSessionId && newSessionId !== sessionId) {
+        setSessionId(newSessionId);
       }
 
       const reader = response.body?.getReader();
@@ -101,7 +110,7 @@ export default function ChatPage() {
         ...prev,
         {
           role: 'assistant',
-          content: '抱歉，发生了错误，请稍后重试。',
+          content: `抱歉，发生了错误：${error instanceof Error ? error.message : '请稍后重试'}`,
         },
       ]);
     } finally {
